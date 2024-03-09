@@ -11,13 +11,20 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(bodyParser.json());
-const corsOptions = {
-  origin: 'https://api-task-frontend-gray.vercel.app/',
-  optionsSuccessStatus: 200,
-  credentials: true,
-};
 
-app.use(cors(corsOptions));
+
+const allowedOrigins = ['https://api-task-frontend-gray.vercel.app'];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
 
 
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -27,8 +34,6 @@ mongoose.connection.once('open', () => {
 }).on('error', (error) => {
   console.log('MongoDB connection error:', error);
 });
-
-  
 
 
 
