@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3001;
 
 app.use(bodyParser.json());
 const corsOptions = {
-  origin: 'https://api-task-frontend-gray.vercel.app/',
+  origin: '*',
   optionsSuccessStatus: 200,
   credentials: true,
 };
