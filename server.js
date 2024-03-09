@@ -11,15 +11,14 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(bodyParser.json());
-// const corsOptions = {
-//   origin: 'https://api-task-frontend-gray.vercel.app/',
-//   optionsSuccessStatus: 200,
-//   credentials: true,
-// };
+const corsOptions = {
+  origin: 'https://api-task-frontend-gray.vercel.app/',
+  optionsSuccessStatus: 200,
+  credentials: true,
+};
 
-app.use(cors());
-
-
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.connection.once('open', () => {
