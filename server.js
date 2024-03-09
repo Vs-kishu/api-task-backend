@@ -36,9 +36,9 @@ app.listen(PORT, () => {
 });
 
 
-app.get('/api/data/:userId',getDatas)
-app.post('/api/create',createUser)
-app.post('/api/add',addData)
-app.put('/api/update/:id',updateData)
+app.get('/api/data/:userId',cors(corsOptions),getDatas)
+app.post('/api/create',cors(corsOptions),createUser)
+app.post('/api/add',cors(corsOptions),addData)
+app.put('/api/update/:id',cors(corsOptions),updateData)
   
 
