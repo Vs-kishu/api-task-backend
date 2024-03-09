@@ -18,7 +18,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.connection.once('open', () => {
@@ -36,9 +35,9 @@ app.listen(PORT, () => {
 });
 
 
-app.get('/api/data/:userId',cors(corsOptions),getDatas)
-app.post('/api/create',cors(corsOptions),createUser)
-app.post('/api/add',cors(corsOptions),addData)
-app.put('/api/update/:id',cors(corsOptions),updateData)
+app.get('/api/data/:userId',getDatas)
+app.post('/api/create',createUser)
+app.post('/api/add',addData)
+app.put('/api/update/:id',updateData)
   
 
